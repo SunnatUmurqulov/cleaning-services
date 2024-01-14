@@ -1,19 +1,25 @@
 package com.company.cleaningservices.entity;
 
 import com.company.cleaningservices.entity.enums.SystemRoleName;
+import com.company.cleaningservices.entity.template.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.Collections;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
     @Column(nullable = false)
@@ -23,10 +29,39 @@ public class User {
     @Enumerated(EnumType.STRING)
     private SystemRoleName systemRoleName;
 
-    public User(String fullName, String password, String phoneNumber, SystemRoleName systemRoleName) {
-        this.fullName = fullName;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.systemRoleName = systemRoleName;
+    private boolean enabled;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.systemRoleName.name());
+        return Collections.singleton(simpleGrantedAuthority);
+    }
+
+    @Override
+    public String getUsername() {
+        return this.phoneNumber;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
     }
 }
