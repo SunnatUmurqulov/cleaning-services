@@ -25,5 +25,4 @@ public class Orders extends BaseEntity {
     private SubServices subServicesId;
     @CreationTimestamp
     private Timestamp orderDate;
-    private boolean isCompleted;
 }
