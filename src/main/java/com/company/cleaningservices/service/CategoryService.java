@@ -56,6 +56,7 @@ public class CategoryService {
             return new ApiResponse("Category not found",false);
         }
         servicesCategoryRepository.deleteById(id);
+        System.out.println("test");
         System.out.println("test2");
         return new ApiResponse("Deleted",true);
     }
