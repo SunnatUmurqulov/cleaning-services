@@ -38,7 +38,7 @@ public class CategoryService {
     }
 
     public HttpEntity<?> allCategory(Pageable pageable) {
-        servicesCategoryRepository.findByCategoryName(pageable);
+        servicesCategoryRepository.findAll(pageable);
         return null;
     }
 

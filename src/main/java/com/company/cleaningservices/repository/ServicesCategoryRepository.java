@@ -7,5 +7,4 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServicesCategoryRepository extends JpaRepository<ServicesCategory,Integer> {
-     Page<ServicesCategory> findByCategoryName( Pageable pageable);
 }
