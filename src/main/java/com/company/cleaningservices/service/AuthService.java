@@ -28,7 +28,7 @@ public class AuthService {
         }
         User user = new User(
                 registerDTO.getFullName(),
-                registerDTO.getPassword(),
+                registerDTO.getPhoneNumber(),
                 passwordEncoder.encode(registerDTO.getPassword()),
                 SystemRoleName.SYSTEM_ROLE_USER
         );

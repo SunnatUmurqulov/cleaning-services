@@ -2,7 +2,10 @@ package com.company.cleaningservices.entity;
 
 import com.company.cleaningservices.entity.enums.SystemRoleName;
 import com.company.cleaningservices.entity.template.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,10 +32,17 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private SystemRoleName systemRoleName;
 
-    private boolean enabled;
+    private boolean enabled = true;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
+
+    public User(String fullName, String phoneNumber, String password, SystemRoleName systemRoleName) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.systemRoleName = systemRoleName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -64,4 +74,6 @@ public class User extends BaseEntity implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+
 }

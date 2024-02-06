@@ -14,9 +14,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class FileService {
-    private final String uploadDir = "C:\\Users\\Asus\\Desktop\\LocalStorage";
     public String saveAttachment(MultipartFile multipartFile) throws IOException {
-        String uniqueFileName = UUID.randomUUID().toString() + "_" + multipartFile.getOriginalFilename();
+        String uniqueFileName = UUID.randomUUID() + "_" + multipartFile.getOriginalFilename();
+        String uploadDir = "/home/sunnat/Desktop/LocalStorage";
         Path filePath = Path.of(uploadDir, uniqueFileName);
         Files.copy(multipartFile.getInputStream(),filePath, StandardCopyOption.REPLACE_EXISTING);
         return filePath.toString();

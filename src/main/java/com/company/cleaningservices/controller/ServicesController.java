@@ -1,12 +1,17 @@
 package com.company.cleaningservices.controller;
 
+import com.company.cleaningservices.entity.Services;
 import com.company.cleaningservices.payload.ApiResponse;
 import com.company.cleaningservices.payload.ServiceDTO;
 import com.company.cleaningservices.service.CleaningService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/services")
@@ -27,8 +32,10 @@ public class ServicesController {
     }
 
     @GetMapping("/allServices")
-    public HttpEntity<?> allService(){
-        return cleaningService.allService();
+    public Page<Services> allService(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "5") int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return cleaningService.allService(pageable);
     }
 
 

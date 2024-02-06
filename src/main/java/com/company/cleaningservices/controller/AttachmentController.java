@@ -5,7 +5,6 @@ import com.company.cleaningservices.service.AttachmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,7 +17,7 @@ public class AttachmentController {
     private final AttachmentService attachmentService;
 
     @PostMapping("/upload")
-    public HttpEntity<?> upload(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+    public HttpEntity<?> upload(@RequestParam(value = "file") MultipartFile multipartFile)  {
         ApiResponse apiResponse = attachmentService.uploadFile(multipartFile);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }

@@ -6,7 +6,6 @@ import com.company.cleaningservices.service.CleaningTypesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,7 +32,7 @@ public class CleaningTypesController {
     }
 
 
-    @GetMapping("/{type_id}}")
+    @GetMapping("/{type_id}")
     public HttpEntity<?> getCleaningType(@PathVariable Integer type_id){
         return cleaningTypesService.getCleaningType(type_id);
     }

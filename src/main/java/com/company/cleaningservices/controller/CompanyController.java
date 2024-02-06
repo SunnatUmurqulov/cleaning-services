@@ -1,13 +1,18 @@
 package com.company.cleaningservices.controller;
 
+import com.company.cleaningservices.entity.Company;
 import com.company.cleaningservices.payload.ApiResponse;
 import com.company.cleaningservices.payload.CompanyDTO;
 import com.company.cleaningservices.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.data.domain.PageRequest.of;
 
 @RestController
 @RequestMapping("/api/company")
@@ -35,8 +40,10 @@ public class CompanyController {
     }
 
     @GetMapping("/all_company")
-    public HttpEntity<?> allCompany(){
-        return companyService.allCompany();
+    public Page<Company> allCompany(@RequestParam(defaultValue = "0") int page,
+                                    @RequestParam(defaultValue = "5") int size){
+        PageRequest pageRequest = of(page, size);
+        return companyService.allCompany(pageRequest);
     }
 
     @GetMapping("/{get_company_id}")

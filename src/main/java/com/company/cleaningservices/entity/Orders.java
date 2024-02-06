@@ -2,10 +2,7 @@ package com.company.cleaningservices.entity;
 
 import com.company.cleaningservices.entity.template.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -16,6 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Entity
 @Table(name = "orders")
+@Builder
 public class Orders extends BaseEntity {
     @ManyToOne
     private User userId;

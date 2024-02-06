@@ -4,6 +4,7 @@ import com.company.cleaningservices.entity.Attachment;
 import com.company.cleaningservices.payload.ApiResponse;
 import com.company.cleaningservices.repository.AttachmentRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class AttachmentService {
     private final FileService fileService;
     private final AttachmentRepository attachmentRepository;
 
-    public ApiResponse uploadFile(MultipartFile file) throws IOException {
+    @SneakyThrows
+    public ApiResponse uploadFile(MultipartFile file){
         String filePath = fileService.saveAttachment(file);
         Attachment attachment = new Attachment();
         attachment.setName(file.getOriginalFilename());
@@ -29,6 +31,7 @@ public class AttachmentService {
     }
 
     public ApiResponse deleteAttachment(Integer attachmentId) {
-        return null;
+        attachmentRepository.deleteById(attachmentId);
+        return new ApiResponse("Deleted successfully",true);
     }
 }

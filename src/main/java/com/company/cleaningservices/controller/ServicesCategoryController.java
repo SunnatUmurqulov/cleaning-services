@@ -4,6 +4,7 @@ import com.company.cleaningservices.payload.ApiResponse;
 import com.company.cleaningservices.payload.CategoryDTO;
 import com.company.cleaningservices.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,10 @@ public class ServicesCategoryController {
     }
 
     @GetMapping("/allCategory")
-    public HttpEntity<?> allCategory(){
-        return categoryService.allCategory();
+    public HttpEntity<?> allCategory(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "5") int size){
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return categoryService.allCategory(pageRequest);
     }
 
     @GetMapping("/allCategory/{id}")

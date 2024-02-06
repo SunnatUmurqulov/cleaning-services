@@ -2,10 +2,7 @@ package com.company.cleaningservices.entity;
 
 import com.company.cleaningservices.entity.template.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -13,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "sub_services")
+@Builder
 public class SubServices extends BaseEntity {
     @Column(nullable = false)
     private String name;
