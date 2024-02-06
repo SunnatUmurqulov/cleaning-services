@@ -57,9 +57,7 @@ public class CategoryService {
         }
         servicesCategoryRepository.deleteById(id);
         System.out.println("test");
-
-
-
+        System.out.println("test2");
         return new ApiResponse("Deleted",true);
     }
 }
